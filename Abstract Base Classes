@@ -135,7 +135,7 @@ class DigitalArt(Artwork):
     def __init__(self, title, artist, year, file_type):
         super().__init__(title, artist, year)
         self.file_type = file_type  # e.g., JPEG, PNG, GIF
-
+    #Polymorphism: same method called three times, but diffferent objects are created
     def display_info(self):
         base_info = super().display_info()
         return f"{base_info} | Digital Art (File Type: {self.file_type})"

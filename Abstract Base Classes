@@ -78,6 +78,35 @@ class Artwork(ABC):
                 return artwork
         return None
 
+    def __init__(self, artworks=None):
+        self._artworks = artworks if artworks else []
+        self._admin_log = []
+
+    @property
+    def artworks(self):
+        return list(self._artworks)
+
+    @property
+    def admin_log(self):
+        return list(self._admin_log)
+
+    def _get_artwork_by_id(self, artwork_id):
+        for art in self._artworks:
+            if art["id"] == artwork_id:
+                return art
+        return None
+
+    def _log_action(self, event, user_id="Admin", details=None):
+        log_entry = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "user_id": user_id,
+            "event": event,
+            "details": details or {}
+        }
+        self._admin_log.append(log_entry)
+        return log_entry
+
+
 #Organization and Tagging
 class Painting(Artwork):
     def display_info(self):

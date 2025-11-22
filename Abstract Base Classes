@@ -1,0 +1,56 @@
+#User Management 
+class user:
+    def __init__(self, username: str, password: str, role: str = "user"):
+        self.__username = username
+        self.__password = password
+        self.__role = role
+
+    @property
+    def username(self):
+        """getter for username"""
+        return self.__username
+
+    @property
+    def role(self):
+        """getter for role"""
+        return self.__role
+
+    def set_role(self, new_role: str):
+        valid_roles = {"user", "admin"}
+        if new_role not in valid_roles:
+            raise ValueError("Invalid Role.")
+        self.__role = new_role
+
+    def verify_password(self, password: str) -> bool:
+        return self.__password == password
+
+class manage_users:
+    def __init__(self):
+        self.__users = {}
+
+    def register_user(self):
+        print("Create an account")
+        username = input("Enter a username: ").strip()
+        password = input("Enter a password: ").strip()
+
+        if username in self.users:
+            print("Username already exists.")
+            return
+
+        self.__users[username] = User(username, password)
+        print(f"User {username} created.")
+    
+    def login_user(self):
+        print("User login")
+        username = input("Enter username: ").strip()
+        password = input("Enter password: ").strip()
+
+        user = self.__users.get(username)
+        if not user:
+            print("User not found.")
+            return
+
+        if user.verify_password(password):
+            print(f"Login success. Welcome {user.username}!")
+        else:
+            print("Incorrect password.")

@@ -140,3 +140,36 @@ class DigitalArt(Artwork):
         base_info = super().display_info()
         return f"{base_info} | Digital Art (File Type: {self.file_type})"
 
+
+#Artwork Management
+class ArtworkManage:
+    def __init__(self):
+        self.database = []
+     def upload_artwork(self, artwork: Artwork, user_id: str):
+        """Add artwork to the database, assigning an owner."""
+        artwork.owner = user_id
+        artwork = {
+            "artwork_id": len(self.database),  
+            "user_id": user_id,
+            "image": artwork_data,
+            "title": metadata.get("title"),
+            "description": metadata.get("description"),
+            "date": metadata.get("date")
+        }
+        self.database.append(artwork)
+        return f"Artwork '{artwork['title']}' uploaded successfully! ID: {artwork['artwork_id']}"
+    def edit_artwork(self, artwork_id: int, updated_data: Dict[str, Any]) -> str:
+        if artwork_id >= len(self.database) or artwork_id < 0:
+            raise IndexError("Artwork not found.")
+            
+        self.database[artwork_id].update(updated_data)
+        return f"Artwork '{self.database[artwork_id].get('title', 'Untitled')}' updated successfully!"
+   def delete_artwork(self, artwork_id: int, user_id: str, is_admin: bool = False):
+        """Delete artwork only if owned by user or user is admin."""
+        art = self._get_by_id(artwork_id)
+
+        if not is_admin and art.owner != user_id:
+            raise PermissionError("You cannot delete this artwork.")
+
+        self.database.remove(art)
+        return f"Artwork {artwork_id} deleted."

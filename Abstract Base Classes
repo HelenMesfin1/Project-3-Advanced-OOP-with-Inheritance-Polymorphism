@@ -7,12 +7,12 @@ class user:
 
     @property
     def username(self):
-        """getter for username"""
+        "getter for username"
         return self.__username
 
     @property
     def role(self):
-        """getter for role"""
+        "getter for role"
         return self.__role
 
     def set_role(self, new_role: str):
@@ -110,13 +110,39 @@ class Artwork(ABC):
 
 
 #Organization and Tagging
+
+    @abstractmethod
+    def display_info(self):
+        "Common interface for all artworks"
+        return f"{self.title} by {self.artist}, {self.year}"
+
+# Derived Class 1
 class Painting(Artwork):
+    def __init__(self, title, artist, year, medium):
+        super().__init__(title, artist, year)
+        self.medium = medium  # e.g., Oil, Acrylic, Watercolor
+
     def display_info(self):
-        return f"Painting: {self.title} by {self.artist}, {self.year}"
+        base_info = super().display_info()
+        return f"{base_info} | Painting (Medium: {self.medium})"
+
+# Derived Class 2
 class Sculpture(Artwork):
+    def __init__(self, title, artist, year, material):
+        super().__init__(title, artist, year)
+        self.material = material  # e.g., Marble, Bronze, Wood
+
     def display_info(self):
-        return f"Sculpture: {self.title} by {self.artist}, {self.year}"
+        base_info = super().display_info()
+        return f"{base_info} | Sculpture (Material: {self.material})"
+
+# Derived Class 3
 class DigitalArt(Artwork):
+    def __init__(self, title, artist, year, file_type):
+        super().__init__(title, artist, year)
+        self.file_type = file_type  # e.g., JPEG, PNG, GIF
+
     def display_info(self):
-        return f"Digital Art: {self.title} by {self.artist}, created in {self.year}"
+        base_info = super().display_info()
+        return f"{base_info} | Digital Art (File Type: {self.file_type})"
 

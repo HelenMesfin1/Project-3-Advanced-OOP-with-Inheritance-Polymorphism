@@ -55,7 +55,8 @@ class manage_users:
         else:
             print("Incorrect password.")
 class Artwork(ABC):
-    """Abstract base class for all artworks."""
+
+    "Abstract base class for all artworks."
 
     def __init__(self, title: str, artist: str, year: int):
         self.title = title
@@ -78,6 +79,7 @@ class Artwork(ABC):
                 return artwork
         return None
 
+# Administrative Tools 
     def __init__(self, artworks=None):
         self._artworks = artworks if artworks else []
         self._admin_log = []

@@ -110,12 +110,6 @@ class Artwork(ABC):
 
 
 #Organization and Tagging
-
-    @abstractmethod
-    def display_info(self):
-        "Common interface for all artworks"
-        return f"{self.title} by {self.artist}, {self.year}"
-
 # Derived Class 1
 class Painting(Artwork):
     def __init__(self, title, artist, year, medium):

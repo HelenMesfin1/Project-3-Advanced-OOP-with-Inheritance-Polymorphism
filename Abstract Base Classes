@@ -54,6 +54,7 @@ class manage_users:
             print(f"Login success. Welcome {user.username}!")
         else:
             print("Incorrect password.")
+
 class Artwork(ABC):
 
     "Abstract base class for all artworks."

@@ -64,5 +64,28 @@ class Artwork(ABC):
 
     @abstractmethod
     def display_info(self) -> str:
-        """Must be implemented by subclasses."""
+        "Must be implemented by subclasses."
         pass
+  @property
+    def artworks(self):
+        "Return a copy of artworks to protect internal data."
+        return list(self.__artworks)
+
+    def get_artwork_by_id(self, artwork_id):
+        "Return an artwork dictionary by its ID."
+        for artwork in self.__artworks:
+            if artwork["id"] == artwork_id:
+                return artwork
+        return None
+
+#Organization and Tagging
+class Painting(Artwork):
+    def display_info(self):
+        return f"Painting: {self.title} by {self.artist}, {self.year}"
+class Sculpture(Artwork):
+    def display_info(self):
+        return f"Sculpture: {self.title} by {self.artist}, {self.year}"
+class DigitalArt(Artwork):
+    def display_info(self):
+        return f"Digital Art: {self.title} by {self.artist}, created in {self.year}"
+

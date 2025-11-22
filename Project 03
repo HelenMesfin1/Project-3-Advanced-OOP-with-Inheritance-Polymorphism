@@ -1,0 +1,12 @@
+class Artwork(ABC):
+    """Abstract base class for all artworks."""
+
+    def __init__(self, title: str, artist: str, year: int):
+        self.title = title
+        self.artist = artist
+        self.year = year
+
+    @abstractmethod
+    def display_info(self) -> str:
+        """Must be implemented by subclasses."""
+        pass
